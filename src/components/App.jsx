@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { category } from "../utils/index.js";
 import { connect } from "react-redux";
-import {fetchData} from "../redux/action.js"
+import { fetchData } from "../redux/action.js";
 import Pagination from "./Pagination.jsx";
 import Result from "./Result";
 
 const App = (props) => {
-  const [displayData, setdisplayData] = useState([])
+  const [displayData, setdisplayData] = useState([]);
   const [selectedOption, setSelectedOption] = useState(category[0]);
-  const [error, seterror] = useState("");
+  const [error] = useState("");
   const { results } = props;
   useEffect(() => {
     handleFetchData();
-  }, []);
+  });
   const handleFetchData = () => {
     props.fetchData();
   };
@@ -31,57 +31,75 @@ const App = (props) => {
         }
       }
     }
-    console.log(a);
     setdisplayData(a);
   };
-  if (error) return <h1>{error}</h1>;
+  if (error)
+    return (
+      <div className="error-notice">
+        <div className="error danger">
+          <strong>Error</strong>
+          Please try again.
+        </div>
+      </div>
+    );
   return (
-    <div>
-      <label htmlFor="category">Choose a Category:</label> <br />
-      <select
-        name="category"
-        id="category"
-        onChange={filterData}
-        value={selectedOption}
-      >
-        {category.map((val, id) => {
-          return (
-            <option value={val} key={id}>
-              {val}
-            </option>
-          );
-        })}
-      </select>
-      {displayData.length > 0 ? (
-        <>
-          <Pagination
-            data={displayData}
-            RenderComponent={Result}
-            title="Results"
-            pageLimit={5}
-            dataLimit={10}
-          />
-        </>
-      ) : (
-        <h1>No Results to display</h1>
-      )}
-    </div>
+    <div className='wrapper'>
+      <div class="e">
+        <h1>OKR<small>s</small></h1>
+      </div>
+
+      <div className="select">
+        <div>
+          <label htmlFor="category">Choose a Category:</label>
+        </div>
+        <div>
+          <select
+            name="category"
+            id="category"
+            onChange={filterData}
+            value={selectedOption}
+          >
+            {category.map((val, id) => {
+              return (
+                <option value={val} key={id}>
+                  {val}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        </div>
+        {displayData.length > 0 ? (
+          <>
+            <Pagination
+              data={displayData}
+              RenderComponent={Result}
+              title="Results"
+              pageLimit={2}
+              dataLimit={10}
+            />
+          </>
+        ) : (
+          <div class="info-msg">
+            <i class="fa fa-info-circle"></i>
+            No Results Available
+          </div>
+        )}
+      </div>
   );
 };
 const mapStateToProps = (state) => {
-    return {
+  return {
     results: state.fetchDataReducer.results,
-    error: state.fetchDataReducer.error
-    }
-}
+    error: state.fetchDataReducer.error,
+  };
+};
 const mapDispatchToProps = (dispatch) => {
-    return{
-        fetchData: () => {
-            dispatch(fetchData())
-        }
-    }
-}
- 
+  return {
+    fetchData: () => {
+      dispatch(fetchData());
+    },
+  };
+};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);
