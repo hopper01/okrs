@@ -1,3 +1,13 @@
+# Ojective Key Results
+
+## boilerplate for fetching data 
+
+### Tech Stack
+*react
+*redux
+*redux-saga
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
