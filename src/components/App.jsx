@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { BASE_URL, category } from "../utils/index.js";
+import { category } from "../utils/index.js";
+import { connect } from "react-redux";
+import {fetchData} from "../redux/action.js"
 import Pagination from "./Pagination.jsx";
 import Result from "./Result";
 
-const App = () => {
-  const [data, setdata] = useState([]);
+const App = (props) => {
   const [displayData, setdisplayData] = useState([])
   const [selectedOption, setSelectedOption] = useState(category[0]);
   const [error, seterror] = useState("");
+  const { results } = props;
   useEffect(() => {
-    fetchData();
+    handleFetchData();
   }, []);
-  const fetchData = async () => {
-    try {
-      let response = await axios({
-        method: "get",
-        url: BASE_URL,
-        json: true,
-      });
-      const load = response.data.data;
-      setdata(load);
-    } catch (err) {
-      seterror(err);
-    }
+  const handleFetchData = () => {
+    props.fetchData();
   };
   const filterData = (event) => {
     const category = event.target.value;
     setSelectedOption(category);
-    let categorizedData = data.filter((d) => d.category === category);
+    let categorizedData = results.filter((d) => d.category === category);
     // filter by parent_objective_id
     let a = categorizedData.filter((d) => d.parent_objective_id === "" || null);
     a.forEach((ele) => (ele.sub = []));
@@ -77,5 +68,20 @@ const App = () => {
     </div>
   );
 };
+const mapStateToProps = (state) => {
+    return {
+    results: state.fetchDataReducer.results,
+    error: state.fetchDataReducer.error
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return{
+        fetchData: () => {
+            dispatch(fetchData())
+        }
+    }
+}
+ 
 
-export default App;
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
