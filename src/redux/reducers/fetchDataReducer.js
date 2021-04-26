@@ -1,7 +1,9 @@
 import { types } from "../types";
 
+
 const initialState = {
   loading: false,
+  categories: {},
   results: {},
   error: {},
 };
@@ -16,6 +18,7 @@ const fetchDataReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        categories: action.categories,
         results: action.payload,
         error: {},
       };
@@ -28,7 +31,7 @@ const fetchDataReducer = (state = initialState, action) => {
       };
     default:
       return {
-        state
+        state,
       };
   }
 };
