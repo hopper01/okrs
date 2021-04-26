@@ -5,10 +5,10 @@ const Dropdown = (props) => {
     <div>
       <span>Select a category:&nbsp;</span>
       <select onChange={props.handleChange} id="dropdown">
-        {/* <option value="select">--select--</option>
+        <option value="select">--select--</option>
         <option value="" key="all">
           All
-        </option> */}
+        </option>
         {props.cat ? (
           [...props.cat].map((category) => (
             <option key={category} value={category}>
