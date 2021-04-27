@@ -40,7 +40,7 @@ const Okrs = (props) => {
                   <ListItem className="parent" title={val.title} />
                 </Link>
                 <Route
-                  path={'/modal/:id'}
+                  path={`/modal/${val.id}`}
                   render={() => (
                     <Modal onClick={handleModalClick} title={val.title} />
                   )}

@@ -10,7 +10,7 @@ const manageOkrs = (arr) => {
     const result = []
     arr.forEach(okr => {
         if (!okr.parent_objective_id) {
-            result.push({ ...okr, children: [], hideChild:true })
+            result.push({ ...okr, children: [], hideChild:false })
         }
     });
     result.forEach(parentOkr => {

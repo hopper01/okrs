@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { fetchData } from "../redux/action.js";
 import Dropdown from "./Dropdown";
 import Okrs from "./Okrs";
-import { filterByCategory} from "../utils/index"
 import loader from "../assets/loader.svg";
-import Modal from "./Modal"
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-  withRouter,
-  Link
 } from "react-router-dom";
 
 class Container extends React.Component {
@@ -20,14 +13,6 @@ class Container extends React.Component {
   componentDidMount() {
     this.props.fetchData();
   }
-  // const handleChange = (e) => {
-  //   const category = e.target.value;
-  //   if (category === "select") {
-  //     setData(null)
-  //   }
-  //   const data = filterByCategory(props.filteredOkrs,category)
-  //   setData(data)
-  // }
   render(){
   return (
     <div>
