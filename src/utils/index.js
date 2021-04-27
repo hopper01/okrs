@@ -3,6 +3,7 @@ const category = ['All','Company', 'Sales', 'Marketing', 'Finance', 'People', 'P
      'Management', 'Engineering', 'Administration', 'Customer Success','Design']
 
 const filterByCategory = (arr, category) => {
+    if (!category) return arr;
       return  arr.filter((d) => d.category === category);
 }
 const manageOkrs = (arr) => {
@@ -18,10 +19,6 @@ const manageOkrs = (arr) => {
     })
     return result
 }
-const filterOkrs = (okrs, category) => {
-     if (!category) return okrs;
-    return okrs.filter((okr) => okr.category === category)
-}
 const getCategories = (okrs) => {
     const result = new Set()
     okrs.forEach(okr => {
@@ -29,4 +26,4 @@ const getCategories = (okrs) => {
     })
     return result;
 }
-export { BASE_URL, category, filterByCategory, manageOkrs, filterOkrs, getCategories };
+export { BASE_URL, category, filterByCategory, manageOkrs, getCategories };

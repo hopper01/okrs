@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { fetchData } from "../redux/action.js";
 import Dropdown from "./Dropdown";
 import Okrs from "./Okrs";
-import { filterOkrs } from "../utils/index"
+import { filterByCategory} from "../utils/index"
 import loader from "../assets/loader.svg";
+import Modal from "./Modal"
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,43 +15,45 @@ import {
   Link
 } from "react-router-dom";
 
-const Container = (props) => {
-  const [Data, setData] = useState([])
-  useEffect(() => {
-    props.fetchData(); 
-  });
-  const handleChange = (e) => {
-    const category = e.target.value;
-    if (category === "select") {
-      setData(null)
-    }
-    const data = filterOkrs(props.results,category)
-    setData(data)
+class Container extends React.Component {
+ 
+  componentDidMount() {
+    this.props.fetchData();
   }
+  // const handleChange = (e) => {
+  //   const category = e.target.value;
+  //   if (category === "select") {
+  //     setData(null)
+  //   }
+  //   const data = filterByCategory(props.filteredOkrs,category)
+  //   setData(data)
+  // }
+  render(){
   return (
     <div>
-      {props.isLoading ? (
+      {this.props.isLoading ? (
         <img src={loader} alt="loader" className="loader" />
       ) : (
         <div></div>
       )}
-      {props.errorMesssage ? <div>{props.error}</div> : <div></div>}
+      {this.props.errorMesssage ? <div>{this.props.error}</div> : <div></div>}
 
       {
         <>
         <Router>
-          <Dropdown cat={props.categories} handleChange={handleChange} />
-          <Okrs data={Data} />
+          <Dropdown cat={this.props.categories}  />
+          <Okrs data={this.props.filteredOkrs} />
           </Router>
         </>
       }
     </div>
   );
+  }
 };
 
 const mapStateToProps = (state) => {
   return {
-    results: state.fetchDataReducer.results,
+    filteredOkrs: state.fetchDataReducer.filteredOkrs,
     categories: state.fetchDataReducer.categories,
     loading: state.fetchDataReducer.loading,
     error: state.fetchDataReducer.error,

@@ -1,10 +1,11 @@
 import { types } from "../types";
-
+import {filterByCategory} from "../../utils/index"
 
 const initialState = {
   loading: false,
   categories: {},
   results: {},
+  filteredOkrs:{},
   error: {},
 };
 const fetchDataReducer = (state = initialState, action) => {
@@ -20,6 +21,7 @@ const fetchDataReducer = (state = initialState, action) => {
         loading: false,
         categories: action.categories,
         results: action.payload,
+        filteredOkrs: action.payload,
         error: {},
       };
     case types.SEND_REQUEST_FAILURE:
@@ -27,6 +29,15 @@ const fetchDataReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         results: {},
+        error: action.error,
+      };
+      case types.FILTER_OKRS:
+      const a = filterByCategory(state.results, action.category)
+
+      return {
+        ...state,
+        loading: false,
+        filteredOkrs: a,
         error: action.error,
       };
     default:

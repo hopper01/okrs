@@ -36,11 +36,11 @@ const Okrs = (props) => {
                 <button onClick={() => handleOnClick(val.id)}>
                   {flag ? ">" : "v"}
                 </button>
-                <Link to={`/${val.id}/modal`}>
+                <Link to={`/modal/${val.id}`}>
                   <ListItem className="parent" title={val.title} />
                 </Link>
                 <Route
-                  path={`/${val.id}/modal`}
+                  path={'/modal/:id'}
                   render={() => (
                     <Modal onClick={handleModalClick} title={val.title} />
                   )}
