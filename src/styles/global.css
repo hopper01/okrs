@@ -70,15 +70,22 @@ h1 em {
 .list-item {
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 30px;
   margin: 8px 0 10px 5px;
   width: 70%;
 }
-.list-item i,
-.list-item span li {
+.list-item > div {
+  margin: 10px;
+  width: 20px;
+}
+.list-item .list{
+  width: 100%;
+}
+.list-item > div > li {
   color: black;
   font-size: 20px;
   line-height: 3.2rem;
+  
 }
 .list-item:hover {
   transform: scale(1.02);
@@ -107,5 +114,5 @@ button {
   width: 80px;
 }
 .collapse-btn{
-  display: inline;
+  display: inline-block;
 }

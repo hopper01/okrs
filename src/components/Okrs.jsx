@@ -25,7 +25,7 @@ const Okrs = (props) => {
     }
   };
   return (
-    <div>
+    <>
       {results ? (
         <List type="parent">
           {results.map((val, idx) => {
@@ -38,7 +38,7 @@ const Okrs = (props) => {
                     <Modal onClick={handleModalClick} title={val.title} />
                   )}
                 />
-                {!val.hideChild ? (
+                { !isEmpty(val.children) && !val.hideChild ? (
                   <List type="child">
                     {val.children ? (
                       val.children.map((value, index) => {
@@ -73,7 +73,7 @@ const Okrs = (props) => {
       ) : (
         <div />
       )}
-    </div>
+    </>
   );
 };
 
