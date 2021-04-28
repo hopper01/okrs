@@ -22,7 +22,7 @@ class Container extends React.Component {
               ) : this.props.error ? (
                 <div>{this.props.error}</div>
               ) : (
-                (<Okrs data={this.props.filteredOkrs} />)
+                <Okrs data={this.props.filteredOkrs} />
               )}
             </Router>
           </>
