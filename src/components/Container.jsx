@@ -13,16 +13,16 @@ class Container extends React.Component {
   render() {
     return (
       <div>
-        {this.props.errorMesssage ? <div>{this.props.error}</div> : <div />}
-
         {
           <>
             <Router>
               <Dropdown cat={this.props.categories} />
               {this.props.isLoading ? (
                 <img src={loader} alt="loader" className="loader" />
+              ) : this.props.errorMesssage ? (
+                <div>{this.props.error}</div>
               ) : (
-                <Okrs data={this.props.filteredOkrs} />
+                (<Okrs data={this.props.filteredOkrs} />)
               )}
             </Router>
           </>
