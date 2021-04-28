@@ -6,7 +6,7 @@ const initialState = {
   categories: {},
   results: {},
   filteredOkrs:{},
-  error: {},
+  error: "",
 };
 const fetchDataReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -22,7 +22,7 @@ const fetchDataReducer = (state = initialState, action) => {
         categories: action.categories,
         results: action.payload,
         filteredOkrs: action.payload,
-        error: {},
+        error: "",
       };
     case types.SEND_REQUEST_FAILURE:
       return {
@@ -38,7 +38,7 @@ const fetchDataReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         filteredOkrs: a,
-        error: action.error,
+        error: "",
       };
     default:
       return {
