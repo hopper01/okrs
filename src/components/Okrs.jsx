@@ -4,6 +4,7 @@ import List from "./List";
 import Modal from "./Modal";
 import { Route, useHistory } from "react-router-dom";
 import { isEmpty } from "../utils/index.js";
+import loader from "../assets/loader.svg";
 
 const Okrs = (props) => {
   const [results, setresults] = useState([]);
@@ -64,7 +65,7 @@ const Okrs = (props) => {
                     )}
                   </List>
                 ) : (
-                  <div />
+                  <><img src={loader} alt="loader" className="loader" /></>
                 )}
               </div>
             );
