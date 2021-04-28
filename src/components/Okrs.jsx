@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import ListItem from "./ListItem";
 import List from "./List";
 import Modal from "./Modal";
-import {
-  Route,
-  useHistory,
-  Link,
-} from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 
 const Okrs = (props) => {
   const [results, setresults] = useState([]);
@@ -36,9 +32,7 @@ const Okrs = (props) => {
                 <button onClick={() => handleOnClick(val.id)}>
                   {flag ? ">" : "v"}
                 </button>
-                <Link to={`/modal/${val.id}`}>
-                  <ListItem className="parent" title={val.title} />
-                </Link>
+                <ListItem title={val.title} id={val.id} />
                 <Route
                   path={`/modal/${val.id}`}
                   render={() => (
@@ -51,14 +45,11 @@ const Okrs = (props) => {
                       val.children.map((value, index) => {
                         return (
                           <>
-                            <Link to={`/${value.id}/modal`}>
-                              <ListItem
-                                className="child"
-                                title={value.title}
-                                key={index}
-                              />
-                            </Link>
-
+                            <ListItem
+                              title={value.title}
+                              key={index}
+                              id={val.id}
+                            />
                             <Route
                               path={`/${value.id}/modal`}
                               render={() => (

@@ -1,11 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const ListItem = ({ className, title, children }) => {
+const ListItem = ({ className, title, id, children }) => {
   return (
-    <div className={className}>
+    <div className="list-item">
       <i className="far fa-user-circle"></i>
       <span>
-        <li>{title}</li>
+        <Link to={`/modal/${id}`}>
+          <li>{title}</li>
+        </Link>
       </span>
       {children}
     </div>
