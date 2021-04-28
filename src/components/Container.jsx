@@ -19,12 +19,11 @@ class Container extends React.Component {
           <>
             <Router>
               <Dropdown cat={this.props.categories} />
-                      {this.props.isLoading ? (
-          <img src={loader} alt="loader" className="loader" />
-        ) : (
-         <Okrs data={this.props.filteredOkrs} />
-        )}
-              
+              {this.props.isLoading ? (
+                <img src={loader} alt="loader" className="loader" />
+              ) : (
+                <Okrs data={this.props.filteredOkrs} />
+              )}
             </Router>
           </>
         }
