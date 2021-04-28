@@ -19,7 +19,7 @@ class Container extends React.Component {
               <Dropdown cat={this.props.categories} />
               {this.props.isLoading ? (
                 <img src={loader} alt="loader" className="loader" />
-              ) : this.props.errorMesssage ? (
+              ) : this.props.error ? (
                 <div>{this.props.error}</div>
               ) : (
                 (<Okrs data={this.props.filteredOkrs} />)
