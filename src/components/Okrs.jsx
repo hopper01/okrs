@@ -3,10 +3,10 @@ import ListItem from "./ListItem";
 import List from "./List";
 import Modal from "./Modal";
 import { Route, useHistory } from "react-router-dom";
+import { isEmpty } from "../utils/index.js";
 
 const Okrs = (props) => {
   const [results, setresults] = useState([]);
-  const [flag, setflag] = useState(false);
   const history = useHistory();
   const handleModalClick = () => {
     history.push("/");
@@ -16,11 +16,13 @@ const Okrs = (props) => {
   }, [props.data]);
   const handleOnClick = (id) => {
     // toggle sublist
-    setflag(!flag);
-    let arr = [...results];
+    // toggle only if it has children
     let index = results.findIndex((obj) => obj.id === id);
+    if (!isEmpty(results[index].children)) {
+        let arr = [...results];
     arr[index].hideChild = !results[index].hideChild;
     setresults(arr);
+    }
   };
   return (
     <div>
@@ -28,13 +30,10 @@ const Okrs = (props) => {
         <List type="parent">
           {results.map((val, idx) => {
             return (
-              <div key={val.id}>
-                <button onClick={() => handleOnClick(val.id)}>
-                  {flag ? ">" : "v"}
-                </button>
-                <ListItem title={val.title} id={val.id} />
+              <div key={val.id} >
+              <ListItem title={val.title} id={val.id} handleOnClick={() => handleOnClick(val.id)} hideChild={val.hideChild} hasChild={isEmpty(val.children)}/>
                 <Route
-                  path={`/modal/${val.id}`}
+                  path={`/${val.id}/modal`}
                   render={() => (
                     <Modal onClick={handleModalClick} title={val.title} />
                   )}
@@ -46,9 +45,7 @@ const Okrs = (props) => {
                         return (
                           <>
                             <ListItem
-                              title={value.title}
-                              key={index}
-                              id={val.id}
+                             title={value.title} id={value.id} handleOnClick={() => handleOnClick(value.id)} hideChild={value.hideChild} hasChild={isEmpty(value.children)}
                             />
                             <Route
                               path={`/${value.id}/modal`}

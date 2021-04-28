@@ -106,3 +106,6 @@ button {
   height: 40px;
   width: 80px;
 }
+.collapse-btn{
+  display: inline;
+}
