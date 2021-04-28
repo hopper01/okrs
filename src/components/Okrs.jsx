@@ -65,14 +65,14 @@ const Okrs = (props) => {
                     )}
                   </List>
                 ) : (
-                  <><img src={loader} alt="loader" className="loader" /></>
+                  <></>
                 )}
               </div>
             );
           })}
         </List>
       ) : (
-        <div />
+        <><img src={loader} alt="loader" className="loader" /></>
       )}
     </>
   );
